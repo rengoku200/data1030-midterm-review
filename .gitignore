@@ -1,0 +1,23 @@
+# Python and notebook caches
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Local environments and credentials
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Temporary outputs
+*.log
+tmp/
+
+# Keep project data, figures, results, and reports tracked by default.
+# For large data, add specific ignore rules and document download steps.
