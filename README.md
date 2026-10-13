@@ -1,9 +1,9 @@
-# DATA1030 Midterm Review
+# DATA1030 Midterm Project
 
 Brown University | DATA1030 | Fall 2026
 
 ## Overview
-Shared project workspace for data collection, exploratory analysis, and the semester-long supervised machine learning project. The team has not yet finalized a dataset, research question, or prediction target.
+//TBD
 
 ## Repository structure
 
@@ -18,7 +18,7 @@ Shared project workspace for data collection, exploratory analysis, and the seme
 Root files include `.gitignore`, `LICENSE`, `README.md`, and `environment.yml`.
 
 ## Setup
-The environment file contains a proposed pinned starter environment. It has not yet been installed or validated for this project, and no analysis results have been generated in it. Replace it with the course-required environment if applicable, and document the actual Python and package versions used when analysis begins.
+//TBD
 
 ```bash
 conda env create -f environment.yml
@@ -26,7 +26,7 @@ conda activate data1030-midterm
 jupyter lab
 ```
 
-Proposed versions: Python 3.11.10, NumPy 1.26.4, pandas 2.2.3, Matplotlib 3.9.2, seaborn 0.13.2, scikit-learn 1.5.2, requests 2.32.3, JupyterLab 4.2.5.
+Imports and Versions: Python 3.11.10, NumPy 1.26.4, pandas 2.2.3, Matplotlib 3.9.2, seaborn 0.13.2, scikit-learn 1.5.2, requests 2.32.3, JupyterLab 4.2.5.
 
 ## Workflow
 1. Agree on a research question, data source, and supervised prediction target.
@@ -51,8 +51,6 @@ If data is too large for GitHub, document the source link and exact download com
 - Submit the report PDF in `report/` and push all work before submission.
 
 ## Team
-- Baidy Mbaye
-- Other team members: to be added.
+- 
+- Other team members: Jason Uranta, Jack Fei , Baidy Mbaye 
 
-## License
-MIT applies to original project code. Third-party data and publications retain their own terms and require attribution.
