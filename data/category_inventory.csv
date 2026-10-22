@@ -1,0 +1,530 @@
+column,value,count,meaning
+agency,DOT,70322,Department of Transportation.
+agency_name,Department of Transportation,70322,Full name of the responding agency.
+complaint_type,Street Condition,70322,Broad category of street-condition requests.
+descriptor,Blocked - Construction,4245,Reported street obstruction associated with construction.
+descriptor,Cave-in,9647,Reported collapse or sinking of the street surface.
+descriptor,Crash Cushion Defect,225,"Reported defect in a crash cushion, an impact-absorbing road safety device."
+descriptor,Defacement,20,Reported defacement of a street-related surface or feature.
+descriptor,Defective Hardware,5490,Reported defective street hardware; the label does not identify a specific component.
+descriptor,Depression Maintenance,31,Reported maintenance issue involving a depression in the street surface.
+descriptor,Dumpster - Construction Waste,584,Reported street condition involving a construction-waste dumpster.
+descriptor,Failed Street Repair,3487,Reported problem with a previous street repair.
+descriptor,Guard Rail - Street,106,Reported street guard-rail condition.
+descriptor,Hummock,18,Reported raised bump or mound in the street surface.
+descriptor,Line/Marking - After Repaving,507,Reported road line or marking issue after repaving.
+descriptor,Line/Marking - Faded,386,Reported faded road line or marking.
+descriptor,Plate Condition - Anti-Skid,53,Reported issue with a street plate anti-skid surface.
+descriptor,Plate Condition - Noisy,2927,Reported noise from a street plate.
+descriptor,Plate Condition - Open,65,Reported open street-plate condition; no engineering severity is inferred.
+descriptor,Plate Condition - Shifted,622,Reported street plate that has moved out of position.
+descriptor,Pothole,38430,Reported hole in the street surface.
+descriptor,"Rough, Pitted or Cracked Roads",3121,"Reported roughness, pitting, or cracking of the road surface."
+descriptor,Strip Paving,1,Reported condition classified by DOT as Strip Paving; the source label supplies no further detail.
+descriptor,Unsafe Worksite,66,Reported unsafe condition at a worksite.
+descriptor,Wear & Tear,291,Reported deterioration through wear and tear.
+incident_zip,,749,Blank / missing value; distinct from a literal Unspecified or UNKNOWN label.
+incident_zip,10000,19,Incident postal ZIP code 10000; nominal location code.
+incident_zip,10001,296,Incident postal ZIP code 10001; nominal location code.
+incident_zip,10002,450,Incident postal ZIP code 10002; nominal location code.
+incident_zip,10003,483,Incident postal ZIP code 10003; nominal location code.
+incident_zip,10004,214,Incident postal ZIP code 10004; nominal location code.
+incident_zip,10005,106,Incident postal ZIP code 10005; nominal location code.
+incident_zip,10006,79,Incident postal ZIP code 10006; nominal location code.
+incident_zip,10007,227,Incident postal ZIP code 10007; nominal location code.
+incident_zip,10009,221,Incident postal ZIP code 10009; nominal location code.
+incident_zip,10010,220,Incident postal ZIP code 10010; nominal location code.
+incident_zip,10011,535,Incident postal ZIP code 10011; nominal location code.
+incident_zip,10012,298,Incident postal ZIP code 10012; nominal location code.
+incident_zip,10013,368,Incident postal ZIP code 10013; nominal location code.
+incident_zip,10014,520,Incident postal ZIP code 10014; nominal location code.
+incident_zip,10016,559,Incident postal ZIP code 10016; nominal location code.
+incident_zip,10017,422,Incident postal ZIP code 10017; nominal location code.
+incident_zip,10018,165,Incident postal ZIP code 10018; nominal location code.
+incident_zip,10019,525,Incident postal ZIP code 10019; nominal location code.
+incident_zip,10020,29,Incident postal ZIP code 10020; nominal location code.
+incident_zip,10021,267,Incident postal ZIP code 10021; nominal location code.
+incident_zip,10022,510,Incident postal ZIP code 10022; nominal location code.
+incident_zip,10023,460,Incident postal ZIP code 10023; nominal location code.
+incident_zip,10024,396,Incident postal ZIP code 10024; nominal location code.
+incident_zip,10025,508,Incident postal ZIP code 10025; nominal location code.
+incident_zip,10026,133,Incident postal ZIP code 10026; nominal location code.
+incident_zip,10027,302,Incident postal ZIP code 10027; nominal location code.
+incident_zip,10028,361,Incident postal ZIP code 10028; nominal location code.
+incident_zip,10029,367,Incident postal ZIP code 10029; nominal location code.
+incident_zip,10030,79,Incident postal ZIP code 10030; nominal location code.
+incident_zip,10031,215,Incident postal ZIP code 10031; nominal location code.
+incident_zip,10032,224,Incident postal ZIP code 10032; nominal location code.
+incident_zip,10033,315,Incident postal ZIP code 10033; nominal location code.
+incident_zip,10034,253,Incident postal ZIP code 10034; nominal location code.
+incident_zip,10035,295,Incident postal ZIP code 10035; nominal location code.
+incident_zip,10036,456,Incident postal ZIP code 10036; nominal location code.
+incident_zip,10037,44,Incident postal ZIP code 10037; nominal location code.
+incident_zip,10038,196,Incident postal ZIP code 10038; nominal location code.
+incident_zip,10039,34,Incident postal ZIP code 10039; nominal location code.
+incident_zip,10040,87,Incident postal ZIP code 10040; nominal location code.
+incident_zip,10041,4,Incident postal ZIP code 10041; nominal location code.
+incident_zip,10045,3,Incident postal ZIP code 10045; nominal location code.
+incident_zip,10048,2,Incident postal ZIP code 10048; nominal location code.
+incident_zip,10065,382,Incident postal ZIP code 10065; nominal location code.
+incident_zip,10069,17,Incident postal ZIP code 10069; nominal location code.
+incident_zip,10075,200,Incident postal ZIP code 10075; nominal location code.
+incident_zip,10103,1,Incident postal ZIP code 10103; nominal location code.
+incident_zip,10105,2,Incident postal ZIP code 10105; nominal location code.
+incident_zip,10110,1,Incident postal ZIP code 10110; nominal location code.
+incident_zip,10111,1,Incident postal ZIP code 10111; nominal location code.
+incident_zip,10112,1,Incident postal ZIP code 10112; nominal location code.
+incident_zip,10118,4,Incident postal ZIP code 10118; nominal location code.
+incident_zip,10119,7,Incident postal ZIP code 10119; nominal location code.
+incident_zip,10122,1,Incident postal ZIP code 10122; nominal location code.
+incident_zip,10123,1,Incident postal ZIP code 10123; nominal location code.
+incident_zip,10128,380,Incident postal ZIP code 10128; nominal location code.
+incident_zip,10151,4,Incident postal ZIP code 10151; nominal location code.
+incident_zip,10153,1,Incident postal ZIP code 10153; nominal location code.
+incident_zip,10158,1,Incident postal ZIP code 10158; nominal location code.
+incident_zip,10168,7,Incident postal ZIP code 10168; nominal location code.
+incident_zip,10169,2,Incident postal ZIP code 10169; nominal location code.
+incident_zip,10170,1,Incident postal ZIP code 10170; nominal location code.
+incident_zip,10173,2,Incident postal ZIP code 10173; nominal location code.
+incident_zip,10174,1,Incident postal ZIP code 10174; nominal location code.
+incident_zip,10176,1,Incident postal ZIP code 10176; nominal location code.
+incident_zip,10179,1,Incident postal ZIP code 10179; nominal location code.
+incident_zip,10271,2,Incident postal ZIP code 10271; nominal location code.
+incident_zip,10278,1,Incident postal ZIP code 10278; nominal location code.
+incident_zip,10279,2,Incident postal ZIP code 10279; nominal location code.
+incident_zip,10280,15,Incident postal ZIP code 10280; nominal location code.
+incident_zip,10281,2,Incident postal ZIP code 10281; nominal location code.
+incident_zip,10282,22,Incident postal ZIP code 10282; nominal location code.
+incident_zip,10301,574,Incident postal ZIP code 10301; nominal location code.
+incident_zip,10302,181,Incident postal ZIP code 10302; nominal location code.
+incident_zip,10303,178,Incident postal ZIP code 10303; nominal location code.
+incident_zip,10304,612,Incident postal ZIP code 10304; nominal location code.
+incident_zip,10305,446,Incident postal ZIP code 10305; nominal location code.
+incident_zip,10306,1042,Incident postal ZIP code 10306; nominal location code.
+incident_zip,10307,128,Incident postal ZIP code 10307; nominal location code.
+incident_zip,10308,467,Incident postal ZIP code 10308; nominal location code.
+incident_zip,10309,558,Incident postal ZIP code 10309; nominal location code.
+incident_zip,10310,187,Incident postal ZIP code 10310; nominal location code.
+incident_zip,10312,952,Incident postal ZIP code 10312; nominal location code.
+incident_zip,10314,1169,Incident postal ZIP code 10314; nominal location code.
+incident_zip,10451,305,Incident postal ZIP code 10451; nominal location code.
+incident_zip,10452,290,Incident postal ZIP code 10452; nominal location code.
+incident_zip,10453,240,Incident postal ZIP code 10453; nominal location code.
+incident_zip,10454,253,Incident postal ZIP code 10454; nominal location code.
+incident_zip,10455,168,Incident postal ZIP code 10455; nominal location code.
+incident_zip,10456,202,Incident postal ZIP code 10456; nominal location code.
+incident_zip,10457,271,Incident postal ZIP code 10457; nominal location code.
+incident_zip,10458,261,Incident postal ZIP code 10458; nominal location code.
+incident_zip,10459,150,Incident postal ZIP code 10459; nominal location code.
+incident_zip,10460,229,Incident postal ZIP code 10460; nominal location code.
+incident_zip,10461,456,Incident postal ZIP code 10461; nominal location code.
+incident_zip,10462,368,Incident postal ZIP code 10462; nominal location code.
+incident_zip,10463,417,Incident postal ZIP code 10463; nominal location code.
+incident_zip,10464,151,Incident postal ZIP code 10464; nominal location code.
+incident_zip,10465,391,Incident postal ZIP code 10465; nominal location code.
+incident_zip,10466,348,Incident postal ZIP code 10466; nominal location code.
+incident_zip,10467,358,Incident postal ZIP code 10467; nominal location code.
+incident_zip,10468,270,Incident postal ZIP code 10468; nominal location code.
+incident_zip,10469,361,Incident postal ZIP code 10469; nominal location code.
+incident_zip,10470,141,Incident postal ZIP code 10470; nominal location code.
+incident_zip,10471,412,Incident postal ZIP code 10471; nominal location code.
+incident_zip,10472,263,Incident postal ZIP code 10472; nominal location code.
+incident_zip,10473,241,Incident postal ZIP code 10473; nominal location code.
+incident_zip,10474,93,Incident postal ZIP code 10474; nominal location code.
+incident_zip,10475,199,Incident postal ZIP code 10475; nominal location code.
+incident_zip,11001,30,Incident postal ZIP code 11001; nominal location code.
+incident_zip,11004,106,Incident postal ZIP code 11004; nominal location code.
+incident_zip,11005,8,Incident postal ZIP code 11005; nominal location code.
+incident_zip,11040,46,Incident postal ZIP code 11040; nominal location code.
+incident_zip,11101,1040,Incident postal ZIP code 11101; nominal location code.
+incident_zip,11102,384,Incident postal ZIP code 11102; nominal location code.
+incident_zip,11103,353,Incident postal ZIP code 11103; nominal location code.
+incident_zip,11104,214,Incident postal ZIP code 11104; nominal location code.
+incident_zip,11105,411,Incident postal ZIP code 11105; nominal location code.
+incident_zip,11106,323,Incident postal ZIP code 11106; nominal location code.
+incident_zip,11109,6,Incident postal ZIP code 11109; nominal location code.
+incident_zip,11201,710,Incident postal ZIP code 11201; nominal location code.
+incident_zip,11203,414,Incident postal ZIP code 11203; nominal location code.
+incident_zip,11204,575,Incident postal ZIP code 11204; nominal location code.
+incident_zip,11205,560,Incident postal ZIP code 11205; nominal location code.
+incident_zip,11206,433,Incident postal ZIP code 11206; nominal location code.
+incident_zip,11207,610,Incident postal ZIP code 11207; nominal location code.
+incident_zip,11208,436,Incident postal ZIP code 11208; nominal location code.
+incident_zip,11209,611,Incident postal ZIP code 11209; nominal location code.
+incident_zip,11210,382,Incident postal ZIP code 11210; nominal location code.
+incident_zip,11211,628,Incident postal ZIP code 11211; nominal location code.
+incident_zip,11212,371,Incident postal ZIP code 11212; nominal location code.
+incident_zip,11213,350,Incident postal ZIP code 11213; nominal location code.
+incident_zip,11214,561,Incident postal ZIP code 11214; nominal location code.
+incident_zip,11215,787,Incident postal ZIP code 11215; nominal location code.
+incident_zip,11216,461,Incident postal ZIP code 11216; nominal location code.
+incident_zip,11217,431,Incident postal ZIP code 11217; nominal location code.
+incident_zip,11218,634,Incident postal ZIP code 11218; nominal location code.
+incident_zip,11219,661,Incident postal ZIP code 11219; nominal location code.
+incident_zip,11220,650,Incident postal ZIP code 11220; nominal location code.
+incident_zip,11221,397,Incident postal ZIP code 11221; nominal location code.
+incident_zip,11222,617,Incident postal ZIP code 11222; nominal location code.
+incident_zip,11223,490,Incident postal ZIP code 11223; nominal location code.
+incident_zip,11224,143,Incident postal ZIP code 11224; nominal location code.
+incident_zip,11225,252,Incident postal ZIP code 11225; nominal location code.
+incident_zip,11226,370,Incident postal ZIP code 11226; nominal location code.
+incident_zip,11228,341,Incident postal ZIP code 11228; nominal location code.
+incident_zip,11229,525,Incident postal ZIP code 11229; nominal location code.
+incident_zip,11230,515,Incident postal ZIP code 11230; nominal location code.
+incident_zip,11231,394,Incident postal ZIP code 11231; nominal location code.
+incident_zip,11232,448,Incident postal ZIP code 11232; nominal location code.
+incident_zip,11233,434,Incident postal ZIP code 11233; nominal location code.
+incident_zip,11234,700,Incident postal ZIP code 11234; nominal location code.
+incident_zip,11235,456,Incident postal ZIP code 11235; nominal location code.
+incident_zip,11236,648,Incident postal ZIP code 11236; nominal location code.
+incident_zip,11237,369,Incident postal ZIP code 11237; nominal location code.
+incident_zip,11238,556,Incident postal ZIP code 11238; nominal location code.
+incident_zip,11239,87,Incident postal ZIP code 11239; nominal location code.
+incident_zip,11242,2,Incident postal ZIP code 11242; nominal location code.
+incident_zip,11249,297,Incident postal ZIP code 11249; nominal location code.
+incident_zip,11354,694,Incident postal ZIP code 11354; nominal location code.
+incident_zip,11355,600,Incident postal ZIP code 11355; nominal location code.
+incident_zip,11356,211,Incident postal ZIP code 11356; nominal location code.
+incident_zip,11357,638,Incident postal ZIP code 11357; nominal location code.
+incident_zip,11358,776,Incident postal ZIP code 11358; nominal location code.
+incident_zip,11359,2,Incident postal ZIP code 11359; nominal location code.
+incident_zip,11360,155,Incident postal ZIP code 11360; nominal location code.
+incident_zip,11361,589,Incident postal ZIP code 11361; nominal location code.
+incident_zip,11362,303,Incident postal ZIP code 11362; nominal location code.
+incident_zip,11363,224,Incident postal ZIP code 11363; nominal location code.
+incident_zip,11364,345,Incident postal ZIP code 11364; nominal location code.
+incident_zip,11365,500,Incident postal ZIP code 11365; nominal location code.
+incident_zip,11366,177,Incident postal ZIP code 11366; nominal location code.
+incident_zip,11367,502,Incident postal ZIP code 11367; nominal location code.
+incident_zip,11368,650,Incident postal ZIP code 11368; nominal location code.
+incident_zip,11369,217,Incident postal ZIP code 11369; nominal location code.
+incident_zip,11370,292,Incident postal ZIP code 11370; nominal location code.
+incident_zip,11372,576,Incident postal ZIP code 11372; nominal location code.
+incident_zip,11373,613,Incident postal ZIP code 11373; nominal location code.
+incident_zip,11374,345,Incident postal ZIP code 11374; nominal location code.
+incident_zip,11375,751,Incident postal ZIP code 11375; nominal location code.
+incident_zip,11377,791,Incident postal ZIP code 11377; nominal location code.
+incident_zip,11378,579,Incident postal ZIP code 11378; nominal location code.
+incident_zip,11379,449,Incident postal ZIP code 11379; nominal location code.
+incident_zip,11385,962,Incident postal ZIP code 11385; nominal location code.
+incident_zip,11411,321,Incident postal ZIP code 11411; nominal location code.
+incident_zip,11412,418,Incident postal ZIP code 11412; nominal location code.
+incident_zip,11413,691,Incident postal ZIP code 11413; nominal location code.
+incident_zip,11414,349,Incident postal ZIP code 11414; nominal location code.
+incident_zip,11415,239,Incident postal ZIP code 11415; nominal location code.
+incident_zip,11416,376,Incident postal ZIP code 11416; nominal location code.
+incident_zip,11417,517,Incident postal ZIP code 11417; nominal location code.
+incident_zip,11418,282,Incident postal ZIP code 11418; nominal location code.
+incident_zip,11419,481,Incident postal ZIP code 11419; nominal location code.
+incident_zip,11420,754,Incident postal ZIP code 11420; nominal location code.
+incident_zip,11421,429,Incident postal ZIP code 11421; nominal location code.
+incident_zip,11422,721,Incident postal ZIP code 11422; nominal location code.
+incident_zip,11423,304,Incident postal ZIP code 11423; nominal location code.
+incident_zip,11426,228,Incident postal ZIP code 11426; nominal location code.
+incident_zip,11427,326,Incident postal ZIP code 11427; nominal location code.
+incident_zip,11428,243,Incident postal ZIP code 11428; nominal location code.
+incident_zip,11429,430,Incident postal ZIP code 11429; nominal location code.
+incident_zip,11430,35,Incident postal ZIP code 11430; nominal location code.
+incident_zip,11432,533,Incident postal ZIP code 11432; nominal location code.
+incident_zip,11433,443,Incident postal ZIP code 11433; nominal location code.
+incident_zip,11434,759,Incident postal ZIP code 11434; nominal location code.
+incident_zip,11435,385,Incident postal ZIP code 11435; nominal location code.
+incident_zip,11436,315,Incident postal ZIP code 11436; nominal location code.
+incident_zip,11691,578,Incident postal ZIP code 11691; nominal location code.
+incident_zip,11692,137,Incident postal ZIP code 11692; nominal location code.
+incident_zip,11693,106,Incident postal ZIP code 11693; nominal location code.
+incident_zip,11694,357,Incident postal ZIP code 11694; nominal location code.
+incident_zip,11697,6,Incident postal ZIP code 11697; nominal location code.
+address_type,ADDRESS,27748,Street address.
+address_type,BLOCKFACE,19639,Street segment or block face.
+address_type,INTERSECTION,22779,Intersection of streets.
+address_type,PLACE,72,Source place-based label; exact distinction from PLACENAME is not documented in the schema.
+address_type,PLACENAME,26,Source place-name label; exact distinction from PLACE is not documented in the schema.
+address_type,UNRECOGNIZED,58,Location type not recognized by the source.
+city,,10900,Blank / missing value; distinct from a literal Unspecified or UNKNOWN label.
+city,ARVERNE,40,Geovalidated city/locality label ARVERNE; not an ordinal value.
+city,ASTORIA,749,Geovalidated city/locality label ASTORIA; not an ordinal value.
+city,BAYSIDE,285,Geovalidated city/locality label BAYSIDE; not an ordinal value.
+city,BELLEROSE,71,Geovalidated city/locality label BELLEROSE; not an ordinal value.
+city,BREEZY POINT,1,Geovalidated city/locality label BREEZY POINT; not an ordinal value.
+city,BRONX,5934,Geovalidated city/locality label BRONX; not an ordinal value.
+city,BROOKLYN,14841,Geovalidated city/locality label BROOKLYN; not an ordinal value.
+city,CAMBRIA HEIGHTS,113,Geovalidated city/locality label CAMBRIA HEIGHTS; not an ordinal value.
+city,COLLEGE POINT,82,Geovalidated city/locality label COLLEGE POINT; not an ordinal value.
+city,CORONA,320,Geovalidated city/locality label CORONA; not an ordinal value.
+city,EAST ELMHURST,198,Geovalidated city/locality label EAST ELMHURST; not an ordinal value.
+city,ELMHURST,233,Geovalidated city/locality label ELMHURST; not an ordinal value.
+city,FAR ROCKAWAY,354,Geovalidated city/locality label FAR ROCKAWAY; not an ordinal value.
+city,FLORAL PARK,17,Geovalidated city/locality label FLORAL PARK; not an ordinal value.
+city,FLUSHING,843,Geovalidated city/locality label FLUSHING; not an ordinal value.
+city,FOREST HILLS,210,Geovalidated city/locality label FOREST HILLS; not an ordinal value.
+city,FRESH MEADOWS,180,Geovalidated city/locality label FRESH MEADOWS; not an ordinal value.
+city,GLEN OAKS,23,Geovalidated city/locality label GLEN OAKS; not an ordinal value.
+city,HOLLIS,105,Geovalidated city/locality label HOLLIS; not an ordinal value.
+city,HOWARD BEACH,123,Geovalidated city/locality label HOWARD BEACH; not an ordinal value.
+city,JACKSON HEIGHTS,275,Geovalidated city/locality label JACKSON HEIGHTS; not an ordinal value.
+city,JAMAICA,695,Geovalidated city/locality label JAMAICA; not an ordinal value.
+city,KEW GARDENS,91,Geovalidated city/locality label KEW GARDENS; not an ordinal value.
+city,LITTLE NECK,181,Geovalidated city/locality label LITTLE NECK; not an ordinal value.
+city,LONG ISLAND CITY,394,Geovalidated city/locality label LONG ISLAND CITY; not an ordinal value.
+city,MANHATTAN,4299,Geovalidated city/locality label MANHATTAN; not an ordinal value.
+city,MASPETH,206,Geovalidated city/locality label MASPETH; not an ordinal value.
+city,MIDDLE VILLAGE,175,Geovalidated city/locality label MIDDLE VILLAGE; not an ordinal value.
+city,NEW HYDE PARK,10,Geovalidated city/locality label NEW HYDE PARK; not an ordinal value.
+city,NEW YORK,6029,Geovalidated city/locality label NEW YORK; not an ordinal value.
+city,OAKLAND GARDENS,113,Geovalidated city/locality label OAKLAND GARDENS; not an ordinal value.
+city,OZONE PARK,302,Geovalidated city/locality label OZONE PARK; not an ordinal value.
+city,QUEENS,13663,Geovalidated city/locality label QUEENS; not an ordinal value.
+city,QUEENS VILLAGE,302,Geovalidated city/locality label QUEENS VILLAGE; not an ordinal value.
+city,REGO PARK,112,Geovalidated city/locality label REGO PARK; not an ordinal value.
+city,RICHMOND HILL,105,Geovalidated city/locality label RICHMOND HILL; not an ordinal value.
+city,RIDGEWOOD,295,Geovalidated city/locality label RIDGEWOOD; not an ordinal value.
+city,ROSEDALE,141,Geovalidated city/locality label ROSEDALE; not an ordinal value.
+city,SAINT ALBANS,150,Geovalidated city/locality label SAINT ALBANS; not an ordinal value.
+city,SOUTH OZONE PARK,237,Geovalidated city/locality label SOUTH OZONE PARK; not an ordinal value.
+city,SOUTH RICHMOND HILL,198,Geovalidated city/locality label SOUTH RICHMOND HILL; not an ordinal value.
+city,SPRINGFIELD GARDENS,181,Geovalidated city/locality label SPRINGFIELD GARDENS; not an ordinal value.
+city,STATEN ISLAND,5800,Geovalidated city/locality label STATEN ISLAND; not an ordinal value.
+city,SUNNYSIDE,81,Geovalidated city/locality label SUNNYSIDE; not an ordinal value.
+city,WHITESTONE,253,Geovalidated city/locality label WHITESTONE; not an ordinal value.
+city,WOODHAVEN,128,Geovalidated city/locality label WOODHAVEN; not an ordinal value.
+city,WOODSIDE,284,Geovalidated city/locality label WOODSIDE; not an ordinal value.
+facility_type,,70322,Blank / missing value; distinct from a literal Unspecified or UNKNOWN label.
+status,Closed,66841,Agency-recorded closed status.
+status,Open,8,Agency-recorded open status.
+status,Pending,3473,Agency-recorded pending status.
+community_board,0 Unspecified,132,"Source community-board label 0 Unspecified; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,01 BRONX,510,"Source community-board label 01 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,01 BROOKLYN,1759,"Source community-board label 01 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,01 MANHATTAN,994,"Source community-board label 01 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,01 QUEENS,1983,"Source community-board label 01 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,01 STATEN ISLAND,1891,"Source community-board label 01 STATEN ISLAND; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,02 BRONX,225,"Source community-board label 02 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,02 BROOKLYN,1310,"Source community-board label 02 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,02 MANHATTAN,1262,"Source community-board label 02 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,02 QUEENS,1586,"Source community-board label 02 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,02 STATEN ISLAND,2034,"Source community-board label 02 STATEN ISLAND; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,03 BRONX,247,"Source community-board label 03 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,03 BROOKLYN,1030,"Source community-board label 03 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,03 MANHATTAN,882,"Source community-board label 03 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,03 QUEENS,1244,"Source community-board label 03 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,03 STATEN ISLAND,2451,"Source community-board label 03 STATEN ISLAND; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,04 BRONX,558,"Source community-board label 04 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,04 BROOKLYN,694,"Source community-board label 04 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,04 MANHATTAN,1101,"Source community-board label 04 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,04 QUEENS,1030,"Source community-board label 04 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,05 BRONX,364,"Source community-board label 05 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,05 BROOKLYN,950,"Source community-board label 05 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,05 MANHATTAN,1376,"Source community-board label 05 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,05 QUEENS,1857,"Source community-board label 05 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,06 BRONX,330,"Source community-board label 06 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,06 BROOKLYN,1110,"Source community-board label 06 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,06 MANHATTAN,1156,"Source community-board label 06 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,06 QUEENS,1063,"Source community-board label 06 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,07 BRONX,503,"Source community-board label 07 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,07 BROOKLYN,1095,"Source community-board label 07 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,07 MANHATTAN,1301,"Source community-board label 07 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,07 QUEENS,2744,"Source community-board label 07 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,08 BRONX,822,"Source community-board label 08 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,08 BROOKLYN,745,"Source community-board label 08 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,08 MANHATTAN,1592,"Source community-board label 08 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,08 QUEENS,1520,"Source community-board label 08 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,09 BRONX,611,"Source community-board label 09 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,09 BROOKLYN,440,"Source community-board label 09 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,09 MANHATTAN,423,"Source community-board label 09 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,09 QUEENS,1528,"Source community-board label 09 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,10 BRONX,827,"Source community-board label 10 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,10 BROOKLYN,986,"Source community-board label 10 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,10 MANHATTAN,395,"Source community-board label 10 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,10 QUEENS,1890,"Source community-board label 10 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,11 BRONX,847,"Source community-board label 11 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,11 BROOKLYN,1017,"Source community-board label 11 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,11 MANHATTAN,680,"Source community-board label 11 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,11 QUEENS,2079,"Source community-board label 11 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,12 BRONX,840,"Source community-board label 12 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,12 BROOKLYN,1504,"Source community-board label 12 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,12 MANHATTAN,845,"Source community-board label 12 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,12 QUEENS,2544,"Source community-board label 12 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,13 BROOKLYN,382,"Source community-board label 13 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,13 QUEENS,2945,"Source community-board label 13 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,14 BROOKLYN,823,"Source community-board label 14 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,14 QUEENS,1167,"Source community-board label 14 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,15 BROOKLYN,1011,"Source community-board label 15 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,16 BROOKLYN,421,"Source community-board label 16 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,17 BROOKLYN,651,"Source community-board label 17 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,18 BROOKLYN,1263,"Source community-board label 18 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,26 BRONX,4,"Source community-board label 26 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,27 BRONX,14,"Source community-board label 27 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,28 BRONX,38,"Source community-board label 28 BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,55 BROOKLYN,19,"Source community-board label 55 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,56 BROOKLYN,3,"Source community-board label 56 BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,64 MANHATTAN,37,"Source community-board label 64 MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,80 QUEENS,5,"Source community-board label 80 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,81 QUEENS,57,"Source community-board label 81 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,82 QUEENS,26,"Source community-board label 82 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,83 QUEENS,9,"Source community-board label 83 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,84 QUEENS,7,"Source community-board label 84 QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,95 STATEN ISLAND,49,"Source community-board label 95 STATEN ISLAND; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,Unspecified BRONX,234,"Source community-board label Unspecified BRONX; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,Unspecified BROOKLYN,1162,"Source community-board label Unspecified BROOKLYN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,Unspecified MANHATTAN,323,"Source community-board label Unspecified MANHATTAN; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,Unspecified QUEENS,696,"Source community-board label Unspecified QUEENS; number identifies a district, not rank. Special/nonstandard labels require validation."
+community_board,Unspecified STATEN ISLAND,69,"Source community-board label Unspecified STATEN ISLAND; number identifies a district, not rank. Special/nonstandard labels require validation."
+council_district,,19796,Blank / missing value; distinct from a literal Unspecified or UNKNOWN label.
+council_district,1.0,1344,NYC Council district 1; nominal district identifier.
+council_district,10.0,580,NYC Council district 10; nominal district identifier.
+council_district,11.0,826,NYC Council district 11; nominal district identifier.
+council_district,12.0,520,NYC Council district 12; nominal district identifier.
+council_district,13.0,1003,NYC Council district 13; nominal district identifier.
+council_district,14.0,393,NYC Council district 14; nominal district identifier.
+council_district,15.0,402,NYC Council district 15; nominal district identifier.
+council_district,16.0,416,NYC Council district 16; nominal district identifier.
+council_district,17.0,509,NYC Council district 17; nominal district identifier.
+council_district,18.0,412,NYC Council district 18; nominal district identifier.
+council_district,19.0,1782,NYC Council district 19; nominal district identifier.
+council_district,2.0,999,NYC Council district 2; nominal district identifier.
+council_district,20.0,1024,NYC Council district 20; nominal district identifier.
+council_district,21.0,834,NYC Council district 21; nominal district identifier.
+council_district,22.0,1217,NYC Council district 22; nominal district identifier.
+council_district,23.0,1148,NYC Council district 23; nominal district identifier.
+council_district,24.0,952,NYC Council district 24; nominal district identifier.
+council_district,25.0,760,NYC Council district 25; nominal district identifier.
+council_district,26.0,1491,NYC Council district 26; nominal district identifier.
+council_district,27.0,1405,NYC Council district 27; nominal district identifier.
+council_district,28.0,1309,NYC Council district 28; nominal district identifier.
+council_district,29.0,1021,NYC Council district 29; nominal district identifier.
+council_district,3.0,1558,NYC Council district 3; nominal district identifier.
+council_district,30.0,1297,NYC Council district 30; nominal district identifier.
+council_district,31.0,1618,NYC Council district 31; nominal district identifier.
+council_district,32.0,1591,NYC Council district 32; nominal district identifier.
+council_district,33.0,1376,NYC Council district 33; nominal district identifier.
+council_district,34.0,1112,NYC Council district 34; nominal district identifier.
+council_district,35.0,1061,NYC Council district 35; nominal district identifier.
+council_district,36.0,777,NYC Council district 36; nominal district identifier.
+council_district,37.0,721,NYC Council district 37; nominal district identifier.
+council_district,38.0,1064,NYC Council district 38; nominal district identifier.
+council_district,39.0,1320,NYC Council district 39; nominal district identifier.
+council_district,4.0,1976,NYC Council district 4; nominal district identifier.
+council_district,40.0,562,NYC Council district 40; nominal district identifier.
+council_district,41.0,573,NYC Council district 41; nominal district identifier.
+council_district,42.0,691,NYC Council district 42; nominal district identifier.
+council_district,43.0,517,NYC Council district 43; nominal district identifier.
+council_district,44.0,915,NYC Council district 44; nominal district identifier.
+council_district,45.0,679,NYC Council district 45; nominal district identifier.
+council_district,46.0,745,NYC Council district 46; nominal district identifier.
+council_district,47.0,908,NYC Council district 47; nominal district identifier.
+council_district,48.0,712,NYC Council district 48; nominal district identifier.
+council_district,49.0,1183,NYC Council district 49; nominal district identifier.
+council_district,5.0,760,NYC Council district 5; nominal district identifier.
+council_district,50.0,1873,NYC Council district 50; nominal district identifier.
+council_district,51.0,1782,NYC Council district 51; nominal district identifier.
+council_district,6.0,998,NYC Council district 6; nominal district identifier.
+council_district,7.0,617,NYC Council district 7; nominal district identifier.
+council_district,8.0,740,NYC Council district 8; nominal district identifier.
+council_district,9.0,453,NYC Council district 9; nominal district identifier.
+police_precinct,Precinct 1,1162,NYPD Precinct 1 jurisdiction; nominal identifier.
+police_precinct,Precinct 10,530,NYPD Precinct 10 jurisdiction; nominal identifier.
+police_precinct,Precinct 100,597,NYPD Precinct 100 jurisdiction; nominal identifier.
+police_precinct,Precinct 101,587,NYPD Precinct 101 jurisdiction; nominal identifier.
+police_precinct,Precinct 102,1598,NYPD Precinct 102 jurisdiction; nominal identifier.
+police_precinct,Precinct 103,927,NYPD Precinct 103 jurisdiction; nominal identifier.
+police_precinct,Precinct 104,1890,NYPD Precinct 104 jurisdiction; nominal identifier.
+police_precinct,Precinct 105,1807,NYPD Precinct 105 jurisdiction; nominal identifier.
+police_precinct,Precinct 106,1908,NYPD Precinct 106 jurisdiction; nominal identifier.
+police_precinct,Precinct 107,1535,NYPD Precinct 107 jurisdiction; nominal identifier.
+police_precinct,Precinct 108,1610,NYPD Precinct 108 jurisdiction; nominal identifier.
+police_precinct,Precinct 109,2756,NYPD Precinct 109 jurisdiction; nominal identifier.
+police_precinct,Precinct 110,1123,NYPD Precinct 110 jurisdiction; nominal identifier.
+police_precinct,Precinct 111,2100,NYPD Precinct 111 jurisdiction; nominal identifier.
+police_precinct,Precinct 112,1051,NYPD Precinct 112 jurisdiction; nominal identifier.
+police_precinct,Precinct 113,1515,NYPD Precinct 113 jurisdiction; nominal identifier.
+police_precinct,Precinct 114,2010,NYPD Precinct 114 jurisdiction; nominal identifier.
+police_precinct,Precinct 115,1267,NYPD Precinct 115 jurisdiction; nominal identifier.
+police_precinct,Precinct 120,1326,NYPD Precinct 120 jurisdiction; nominal identifier.
+police_precinct,Precinct 121,1265,NYPD Precinct 121 jurisdiction; nominal identifier.
+police_precinct,Precinct 122,2472,NYPD Precinct 122 jurisdiction; nominal identifier.
+police_precinct,Precinct 123,1431,NYPD Precinct 123 jurisdiction; nominal identifier.
+police_precinct,Precinct 13,661,NYPD Precinct 13 jurisdiction; nominal identifier.
+police_precinct,Precinct 14,388,NYPD Precinct 14 jurisdiction; nominal identifier.
+police_precinct,Precinct 17,849,NYPD Precinct 17 jurisdiction; nominal identifier.
+police_precinct,Precinct 18,1042,NYPD Precinct 18 jurisdiction; nominal identifier.
+police_precinct,Precinct 19,1640,NYPD Precinct 19 jurisdiction; nominal identifier.
+police_precinct,Precinct 20,740,NYPD Precinct 20 jurisdiction; nominal identifier.
+police_precinct,Precinct 22,37,NYPD Precinct 22 jurisdiction; nominal identifier.
+police_precinct,Precinct 23,343,NYPD Precinct 23 jurisdiction; nominal identifier.
+police_precinct,Precinct 24,610,NYPD Precinct 24 jurisdiction; nominal identifier.
+police_precinct,Precinct 25,354,NYPD Precinct 25 jurisdiction; nominal identifier.
+police_precinct,Precinct 26,201,NYPD Precinct 26 jurisdiction; nominal identifier.
+police_precinct,Precinct 28,230,NYPD Precinct 28 jurisdiction; nominal identifier.
+police_precinct,Precinct 30,235,NYPD Precinct 30 jurisdiction; nominal identifier.
+police_precinct,Precinct 32,171,NYPD Precinct 32 jurisdiction; nominal identifier.
+police_precinct,Precinct 33,280,NYPD Precinct 33 jurisdiction; nominal identifier.
+police_precinct,Precinct 34,579,NYPD Precinct 34 jurisdiction; nominal identifier.
+police_precinct,Precinct 40,517,NYPD Precinct 40 jurisdiction; nominal identifier.
+police_precinct,Precinct 41,229,NYPD Precinct 41 jurisdiction; nominal identifier.
+police_precinct,Precinct 42,250,NYPD Precinct 42 jurisdiction; nominal identifier.
+police_precinct,Precinct 43,618,NYPD Precinct 43 jurisdiction; nominal identifier.
+police_precinct,Precinct 44,567,NYPD Precinct 44 jurisdiction; nominal identifier.
+police_precinct,Precinct 45,874,NYPD Precinct 45 jurisdiction; nominal identifier.
+police_precinct,Precinct 46,375,NYPD Precinct 46 jurisdiction; nominal identifier.
+police_precinct,Precinct 47,855,NYPD Precinct 47 jurisdiction; nominal identifier.
+police_precinct,Precinct 48,329,NYPD Precinct 48 jurisdiction; nominal identifier.
+police_precinct,Precinct 49,865,NYPD Precinct 49 jurisdiction; nominal identifier.
+police_precinct,Precinct 5,488,NYPD Precinct 5 jurisdiction; nominal identifier.
+police_precinct,Precinct 50,835,NYPD Precinct 50 jurisdiction; nominal identifier.
+police_precinct,Precinct 52,524,NYPD Precinct 52 jurisdiction; nominal identifier.
+police_precinct,Precinct 6,820,NYPD Precinct 6 jurisdiction; nominal identifier.
+police_precinct,Precinct 60,397,NYPD Precinct 60 jurisdiction; nominal identifier.
+police_precinct,Precinct 61,1086,NYPD Precinct 61 jurisdiction; nominal identifier.
+police_precinct,Precinct 62,1070,NYPD Precinct 62 jurisdiction; nominal identifier.
+police_precinct,Precinct 63,829,NYPD Precinct 63 jurisdiction; nominal identifier.
+police_precinct,Precinct 66,1607,NYPD Precinct 66 jurisdiction; nominal identifier.
+police_precinct,Precinct 67,709,NYPD Precinct 67 jurisdiction; nominal identifier.
+police_precinct,Precinct 68,1053,NYPD Precinct 68 jurisdiction; nominal identifier.
+police_precinct,Precinct 69,535,NYPD Precinct 69 jurisdiction; nominal identifier.
+police_precinct,Precinct 7,294,NYPD Precinct 7 jurisdiction; nominal identifier.
+police_precinct,Precinct 70,860,NYPD Precinct 70 jurisdiction; nominal identifier.
+police_precinct,Precinct 71,474,NYPD Precinct 71 jurisdiction; nominal identifier.
+police_precinct,Precinct 72,1194,NYPD Precinct 72 jurisdiction; nominal identifier.
+police_precinct,Precinct 73,443,NYPD Precinct 73 jurisdiction; nominal identifier.
+police_precinct,Precinct 75,1011,NYPD Precinct 75 jurisdiction; nominal identifier.
+police_precinct,Precinct 76,507,NYPD Precinct 76 jurisdiction; nominal identifier.
+police_precinct,Precinct 77,655,NYPD Precinct 77 jurisdiction; nominal identifier.
+police_precinct,Precinct 78,841,NYPD Precinct 78 jurisdiction; nominal identifier.
+police_precinct,Precinct 79,659,NYPD Precinct 79 jurisdiction; nominal identifier.
+police_precinct,Precinct 81,459,NYPD Precinct 81 jurisdiction; nominal identifier.
+police_precinct,Precinct 83,736,NYPD Precinct 83 jurisdiction; nominal identifier.
+police_precinct,Precinct 84,733,NYPD Precinct 84 jurisdiction; nominal identifier.
+police_precinct,Precinct 88,630,NYPD Precinct 88 jurisdiction; nominal identifier.
+police_precinct,Precinct 9,439,NYPD Precinct 9 jurisdiction; nominal identifier.
+police_precinct,Precinct 90,917,NYPD Precinct 90 jurisdiction; nominal identifier.
+police_precinct,Precinct 94,901,NYPD Precinct 94 jurisdiction; nominal identifier.
+police_precinct,Unspecified,2310,Precinct not identified.
+borough,BRONX,6955,NYC borough: Bronx.
+borough,BROOKLYN,18375,NYC borough: Brooklyn.
+borough,MANHATTAN,12386,NYC borough: Manhattan.
+borough,QUEENS,25980,NYC borough: Queens.
+borough,STATEN ISLAND,6494,NYC borough: Staten Island.
+borough,Unspecified,132,Borough not identified.
+open_data_channel_type,ONLINE,15842,Submitted through an online channel.
+open_data_channel_type,OTHER,1,Other submission channel.
+open_data_channel_type,PHONE,13191,Submitted by telephone.
+open_data_channel_type,UNKNOWN,41288,Submission channel not known or not recorded.
+park_facility_name,Unspecified,70322,No specific park facility identified.
+park_borough,BRONX,6955,NYC borough: Bronx.
+park_borough,BROOKLYN,18375,NYC borough: Brooklyn.
+park_borough,MANHATTAN,12386,NYC borough: Manhattan.
+park_borough,QUEENS,25980,NYC borough: Queens.
+park_borough,STATEN ISLAND,6494,NYC borough: Staten Island.
+park_borough,Unspecified,132,Borough not identified.
+descriptor_2,,70302,Blank / missing value; distinct from a literal Unspecified or UNKNOWN label.
+descriptor_2,Other,20,Additional problem detail recorded as Other; no more specific detail provided.
+location_type,,38771,Blank / missing value; distinct from a literal Unspecified or UNKNOWN label.
+location_type,Bike Lane,39,Bicycle lane.
+location_type,Crosswalk,337,Pedestrian crossing.
+location_type,School Safety Zone,14,School safety zone.
+location_type,Speed Reducer,48,Traffic-calming speed reducer.
+location_type,Street,31006,Street location.
+location_type,Vehicle Lane,107,Vehicle traffic lane.
+closed_48h,0,25967,Not recorded as closed within 48 hours under the labeling rules.
+closed_48h,1,44355,Recorded as closed within 48 hours inclusive.

@@ -1,0 +1,233 @@
+% Technical reference appendix. Requires longtable, booktabs, array, hyperref.
+% Include after references; use \clearpage\onecolumn before \input in a two-column report.
+\section*{Appendix: Data Documentation}
+\addcontentsline{toc}{section}{Appendix: Data Documentation}
+\begingroup
+\small
+\sloppy
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.16}
+\subsection*{A. Source, scope, and labeling}
+This appendix documents the saved NYC DOT Street Condition request dataset: 70,322 rows and 38 columns, with one request per row and creation dates in 2025. Counts were checked against repository commit \texttt{d4a15bc} on October 22, 2026. CSV files do not preserve dataframe dtypes; the types below describe interpretation. The companion GitHub data dictionary and category inventory provide the same definitions and machine-readable counts.
+
+The source is NYC Open Data, dataset \texttt{erm2-nwe9}, \emph{311 Service Requests from 2020 to Present}: \url{https://data.cityofnewyork.us/resource/erm2-nwe9.json}. Source field descriptions are available at \url{https://data.cityofnewyork.us/api/views/erm2-nwe9.json}. Python requests filtered the agency to DOT and the problem to Street Condition, using monthly creation-date windows from January 1, 2025 inclusive through January 1, 2026 exclusive. The automated helper requests ordered pages of 5,000 JSON records, preserves raw data, parses dates, and saves cleaned monthly CSVs.
+
+The original 70,330 records became 70,324 after excluding six negative closure durations (February: 1; March: 2; July: 1; December: 2). The combined data had no duplicate request IDs. Two records with missing closure dates and Unspecified status were excluded from labeling. Recorded closure duration is the closure timestamp minus the creation timestamp, in hours. Dates are stored without timezone offsets, and the notebook uses timezone-naive subtraction; timezone and daylight-saving behavior should be confirmed before making precise elapsed-time claims.
+\begin{longtable}{@{}p{.67\linewidth}p{.10\linewidth}p{.16\linewidth}@{}}
+\caption{Rules used to construct the binary target.}\\
+\toprule Outcome rule & Label & Rows\\\midrule\endfirsthead
+\toprule Outcome rule & Label & Rows\\\midrule\endhead
+\bottomrule\endfoot
+Recorded closure duration from 0 to 48 hours inclusive & 1 & 44,355\\
+Recorded closure duration greater than 48 hours & 0 & 22,492\\
+Missing closure date with Pending or Open status & 0 & 3,475\\
+Missing closure date with Unspecified status & Excluded & 2\\
+\end{longtable}
+The final target has 44,355 ones (63.1\%) and 25,967 zeros (36.9\%), with no missing labels. The 48-hour threshold is a team choice, not a verified city service standard or a measure of task difficulty. Closure means recorded administrative closure, not necessarily physical repair.
+
+Labeling missing-closure Pending/Open requests as 0 assumes at least 48 hours of follow-up and sufficiently complete closure records. The 2025 requests were collected during the team's 2026 work, providing ample elapsed calendar time; record completeness remains an assumption. Missing-closure requests were retained, not all removed. Six Pending records have recorded closure times, so their labels follow the duration rule. There are 66,847 recorded durations, 3,475 missing durations, and 3,276 retained zero-hour durations. The live API changes, so later downloads need not reproduce this snapshot. Exact per-request retrieval times were not logged.
+
+\subsection*{B. Column definitions}
+The saved file contains both possible predictors and audit/outcome fields. Roles describe an initial proposal, not a final fitted matrix. Candidate fields require a submission-time availability check; geovalidated values may have changed since submission. Derive means use calendar features. Leakage means exclude outcome information from predictors. Audit, Constant, Empty, Sparse, and Redundant are excluded initially. Target is the response, not a predictor. No ordered severity categories are defined. Null counts refer to blank CSV cells, not literal Unknown or Unspecified values.
+\begin{longtable}{@{}p{.27\linewidth}p{.60\linewidth}p{.07\linewidth}@{}}
+\caption{All 38 saved columns, semantic types, proposed roles, and missing counts.}\\
+\toprule Column / type / role & Definition and units & Missing\\\midrule\endfirsthead
+\toprule Column / type / role & Definition and units & Missing\\\midrule\endhead
+\bottomrule\endfoot
+\texttt{unique\_\allowbreak{}key}\par Identifier\par\emph{Audit} & Unique service-request identifier. Keep as text for duplicate checks and traceability; exclude from predictors. & 0\\
+\texttt{created\_\allowbreak{}date}\par Timestamp\par\emph{Derive} & Request creation date and time. Parse as a datetime; derive calendar features rather than use the raw timestamp. & 0\\
+\texttt{closed\_\allowbreak{}date}\par Timestamp\par\emph{Leakage} & Date and time the responding agency recorded closure. Used to calculate the outcome; exclude from predictors. & 3,475\\
+\texttt{agency}\par Nominal\par\emph{Constant} & Responding agency acronym. DOT means Department of Transportation; constant after filtering. & 0\\
+\texttt{agency\_\allowbreak{}name}\par Nominal\par\emph{Constant} & Full responding agency name; Department of Transportation in every row. & 0\\
+\texttt{complaint\_\allowbreak{}type}\par Nominal\par\emph{Constant} & Broad problem category. Street Condition in every row; descriptor provides the varying problem detail. & 0\\
+\texttt{descriptor}\par Nominal\par\emph{Candidate} & Specific street-condition problem, with 21 observed categories defined below. These labels are not an ordered severity scale. & 0\\
+\texttt{incident\_\allowbreak{}zip}\par Nominal code\par\emph{Candidate} & Geovalidated incident ZIP code. Preserve as text; numerical magnitude has no predictive interpretation. Codes are listed in the category inventory. & 749\\
+\texttt{intersection\_\allowbreak{}street\_\allowbreak{}1}\par Text\par\emph{Audit} & First intersecting street from the geovalidated incident location. High-cardinality location text. & 24,352\\
+\texttt{intersection\_\allowbreak{}street\_\allowbreak{}2}\par Text\par\emph{Audit} & Second intersecting street from the geovalidated incident location. High-cardinality location text. & 24,331\\
+\texttt{address\_\allowbreak{}type}\par Nominal\par\emph{Candidate} & Type of incident-location information, such as an address, intersection, or street segment. Six observed labels are defined below. & 0\\
+\texttt{city}\par Nominal\par\emph{Audit} & City or locality name returned by geovalidation. Values are not necessarily borough names; partly redundant with other geography. & 10,900\\
+\texttt{facility\_\allowbreak{}type}\par Nominal\par\emph{Empty} & City facility type associated with a request, if available. Entirely blank in this snapshot. & 70,322\\
+\texttt{status}\par Nominal\par\emph{Leakage} & Request status at collection, not necessarily status at submission. Closed, Pending, and Open are defined below. Used for labeling only. & 0\\
+\texttt{resolution\_\allowbreak{}description}\par Text\par\emph{Leakage} & Last action described by the responding agency, sometimes including next steps. Exclude because it can reveal post-submission handling. & 15\\
+\texttt{resolution\_\allowbreak{}action\_\allowbreak{}updated\_\allowbreak{}date}\par Timestamp\par\emph{Leakage} & Date and time the responding agency last updated the request. Post-submission information; exclude from predictors. & 12\\
+\texttt{community\_\allowbreak{}board}\par Nominal code\par\emph{Candidate} & Geovalidated community-board label, typically a board number plus borough. Exceptional labels are retained as source values and need validation. & 0\\
+\texttt{council\_\allowbreak{}district}\par Nominal code\par\emph{Candidate} & City Council district containing the request. Values 1 through 51 identify districts, not a ranking; saved CSV uses decimal-looking codes. & 19,796\\
+\texttt{police\_\allowbreak{}precinct}\par Nominal code\par\emph{Candidate} & NYPD precinct containing the request. Precinct numbers identify jurisdictions, not a ranking; Unspecified means not identified. & 0\\
+\texttt{borough}\par Nominal\par\emph{Candidate} & Incident borough, submitted and confirmed by geovalidation. Five NYC boroughs plus Unspecified. & 0\\
+\texttt{x\_\allowbreak{}coordinate\_\allowbreak{}state\_\allowbreak{}plane}\par Continuous\par\emph{Audit} & Geovalidated horizontal coordinate in the source state-plane system. The source field description does not specify units or CRS; verify before interpreting distances. Redundant with latitude/longitude. & 19,598\\
+\texttt{y\_\allowbreak{}coordinate\_\allowbreak{}state\_\allowbreak{}plane}\par Continuous\par\emph{Audit} & Geovalidated vertical coordinate in the source state-plane system. The source field description does not specify units or CRS; verify before interpreting distances. Redundant with latitude/longitude. & 19,591\\
+\texttt{open\_\allowbreak{}data\_\allowbreak{}channel\_\allowbreak{}type}\par Nominal\par\emph{Candidate} & How the request was submitted: PHONE, ONLINE, OTHER, or UNKNOWN in this snapshot. & 0\\
+\texttt{park\_\allowbreak{}facility\_\allowbreak{}name}\par Text\par\emph{Constant} & Name of a Parks Department facility, if applicable. Every saved value is the placeholder Unspecified. & 0\\
+\texttt{park\_\allowbreak{}borough}\par Nominal\par\emph{Redundant} & Source park-related borough field. In this snapshot its values match borough row for row, so retain only borough for initial modeling. & 0\\
+\texttt{latitude}\par Continuous\par\emph{Candidate} & Incident latitude in decimal degrees. Missing values must be handled within the training pipeline. & 19,601\\
+\texttt{longitude}\par Continuous\par\emph{Candidate} & Incident longitude in decimal degrees. Missing values must be handled within the training pipeline. & 19,601\\
+\texttt{location}\par Structured text\par\emph{Redundant} & Serialized geographic point containing longitude then latitude. Duplicates the separate coordinate fields; do not treat as a third independent location measurement. & 19,601\\
+\texttt{incident\_\allowbreak{}address}\par Text\par\emph{Audit} & Incident-address text supplied for the location. High-cardinality location field; retain for audit rather than the initial predictor matrix. & 14,092\\
+\texttt{street\_\allowbreak{}name}\par Text\par\emph{Audit} & Street name of the incident address supplied by the submitter. High-cardinality location text. & 14,092\\
+\texttt{cross\_\allowbreak{}street\_\allowbreak{}1}\par Text\par\emph{Audit} & First cross street associated with the geovalidated incident location. High-cardinality location text. & 14,511\\
+\texttt{cross\_\allowbreak{}street\_\allowbreak{}2}\par Text\par\emph{Audit} & Second cross street associated with the geovalidated incident location. High-cardinality location text. & 14,494\\
+\texttt{descriptor\_\allowbreak{}2}\par Nominal\par\emph{Sparse} & Third level of problem detail. Only Other appears, in 20 rows; the remaining 70,302 rows are blank. Exclude initially because it is nearly empty. & 70,302\\
+\texttt{location\_\allowbreak{}type}\par Nominal\par\emph{Candidate} & Type of location associated with the request, with six observed labels defined below. Frequently missing; optional candidate requiring missing-value handling. & 38,771\\
+\texttt{landmark}\par Text\par\emph{Audit} & Landmark name associated with the incident location when available. High-cardinality location text. & 48,935\\
+\texttt{bbl}\par Identifier\par\emph{Audit} & Borough-Block-Lot parcel identifier from geovalidation. Preserve as an identifier, not a continuous measurement; decimal suffixes are serialization artifacts. & 43,894\\
+\texttt{closure\_\allowbreak{}hours}\par Continuous\par\emph{Leakage} & Derived recorded duration in hours: (closed\_date - created\_date).total\_seconds() / 3600. Missing when closure is unavailable; excludes negative durations. Never include in predictors. & 3,475\\
+\texttt{closed\_\allowbreak{}48h}\par Binary target\par\emph{Target} & 1 means recorded administrative closure within 48 hours inclusive. 0 means closure after 48 hours, or missing closure with Pending/Open status at collection. See target rules and follow-up assumption below. & 0\\
+\end{longtable}
+\subsection*{C. Category meanings}
+The following explanations interpret source labels in plain language, not as official engineering severity definitions. Categories are nominal. Blank values mean missing information and are distinct from literal Unspecified or UNKNOWN labels. Counts and the complete geographic code inventory are also provided in \texttt{data/category\_inventory.csv} in GitHub.
+\subsubsection*{\texttt{descriptor}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for descriptor.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Blocked - Construction & 4,245 & Reported street obstruction associated with construction.\\
+Cave-in & 9,647 & Reported collapse or sinking of the street surface.\\
+Crash Cushion Defect & 225 & Reported defect in a crash cushion, an impact-absorbing road safety device.\\
+Defacement & 20 & Reported defacement of a street-related surface or feature.\\
+Defective Hardware & 5,490 & Reported defective street hardware; the label does not identify a specific component.\\
+Depression Maintenance & 31 & Reported maintenance issue involving a depression in the street surface.\\
+Dumpster - Construction Waste & 584 & Reported street condition involving a construction-waste dumpster.\\
+Failed Street Repair & 3,487 & Reported problem with a previous street repair.\\
+Guard Rail - Street & 106 & Reported street guard-rail condition.\\
+Hummock & 18 & Reported raised bump or mound in the street surface.\\
+Line/Marking - After Repaving & 507 & Reported road line or marking issue after repaving.\\
+Line/Marking - Faded & 386 & Reported faded road line or marking.\\
+Plate Condition - Anti-Skid & 53 & Reported issue with a street plate anti-skid surface.\\
+Plate Condition - Noisy & 2,927 & Reported noise from a street plate.\\
+Plate Condition - Open & 65 & Reported open street-plate condition; no engineering severity is inferred.\\
+Plate Condition - Shifted & 622 & Reported street plate that has moved out of position.\\
+Pothole & 38,430 & Reported hole in the street surface.\\
+Rough, Pitted or Cracked Roads & 3,121 & Reported roughness, pitting, or cracking of the road surface.\\
+Strip Paving & 1 & Reported condition classified by DOT as Strip Paving; the source label supplies no further detail.\\
+Unsafe Worksite & 66 & Reported unsafe condition at a worksite.\\
+Wear \& Tear & 291 & Reported deterioration through wear and tear.\\
+\end{longtable}
+\subsubsection*{\texttt{address\_\allowbreak{}type}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for address\_type.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+ADDRESS & 27,748 & Street address.\\
+BLOCKFACE & 19,639 & Street segment or block face.\\
+INTERSECTION & 22,779 & Intersection of streets.\\
+PLACE & 72 & Source place-based label; exact distinction from PLACENAME is not documented in the schema.\\
+PLACENAME & 26 & Source place-name label; exact distinction from PLACE is not documented in the schema.\\
+UNRECOGNIZED & 58 & Location type not recognized by the source.\\
+\end{longtable}
+\subsubsection*{\texttt{status}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for status.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Closed & 66,841 & Agency-recorded closed status.\\
+Open & 8 & Agency-recorded open status.\\
+Pending & 3,473 & Agency-recorded pending status.\\
+\end{longtable}
+\subsubsection*{\texttt{borough}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for borough.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+BRONX & 6,955 & NYC borough: Bronx.\\
+BROOKLYN & 18,375 & NYC borough: Brooklyn.\\
+MANHATTAN & 12,386 & NYC borough: Manhattan.\\
+QUEENS & 25,980 & NYC borough: Queens.\\
+STATEN ISLAND & 6,494 & NYC borough: Staten Island.\\
+Unspecified & 132 & Borough not identified.\\
+\end{longtable}
+\subsubsection*{\texttt{open\_\allowbreak{}data\_\allowbreak{}channel\_\allowbreak{}type}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for open\_data\_channel\_type.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+ONLINE & 15,842 & Submitted through an online channel.\\
+OTHER & 1 & Other submission channel.\\
+PHONE & 13,191 & Submitted by telephone.\\
+UNKNOWN & 41,288 & Submission channel not known or not recorded.\\
+\end{longtable}
+\subsubsection*{\texttt{location\_\allowbreak{}type}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for location\_type.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Bike Lane & 39 & Bicycle lane.\\
+Crosswalk & 337 & Pedestrian crossing.\\
+School Safety Zone & 14 & School safety zone.\\
+Speed Reducer & 48 & Traffic-calming speed reducer.\\
+Street & 31,006 & Street location.\\
+Vehicle Lane & 107 & Vehicle traffic lane.\\
+\end{longtable}
+\subsubsection*{\texttt{agency}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for agency.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+DOT & 70,322 & Department of Transportation.\\
+\end{longtable}
+\subsubsection*{\texttt{agency\_\allowbreak{}name}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for agency\_name.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Department of Transportation & 70,322 & Full name of the responding agency.\\
+\end{longtable}
+\subsubsection*{\texttt{complaint\_\allowbreak{}type}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for complaint\_type.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Street Condition & 70,322 & Broad category of street-condition requests.\\
+\end{longtable}
+\subsubsection*{\texttt{descriptor\_\allowbreak{}2}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for descriptor\_2.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Other & 20 & Additional problem detail recorded as Other; no more specific detail provided.\\
+\end{longtable}
+\subsubsection*{\texttt{closed\_\allowbreak{}48h}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for closed\_48h.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+0 & 25,967 & Not recorded as closed within 48 hours under the labeling rules.\\
+1 & 44,355 & Recorded as closed within 48 hours inclusive.\\
+\end{longtable}
+\subsubsection*{\texttt{park\_\allowbreak{}facility\_\allowbreak{}name}}
+\begin{longtable}{@{}p{.32\linewidth}p{.09\linewidth}p{.53\linewidth}@{}}
+\caption{Observed categories for park\_facility\_name.}\\
+\toprule Value & Rows & Meaning\\\midrule\endfirsthead
+\toprule Value & Rows & Meaning\\\midrule\endhead
+\bottomrule\endfoot
+Unspecified & 70,322 & No specific park facility identified.\\
+\end{longtable}
+\subsubsection*{Geographic categories}
+ZIP codes, community boards, council districts, precincts, and locality names are nominal location identifiers. Numbers identify geographic units; they do not define an ordinal scale. Community-board labels may contain exceptional or nonstandard values that need validation. Council codes such as 1.0 are serialization of district IDs, not measured values. Each listed locality name denotes the source geovalidated locality, which is not necessarily a borough name. Park borough has the same six categories and row-level values as borough in this snapshot, so it is redundant. The lists below enumerate all nonblank geographic categories; the GitHub inventory supplies individual counts and meanings.
+\paragraph{\texttt{incident\_\allowbreak{}zip}} 10000; 10001; 10002; 10003; 10004; 10005; 10006; 10007; 10009; 10010; 10011; 10012; 10013; 10014; 10016; 10017; 10018; 10019; 10020; 10021; 10022; 10023; 10024; 10025; 10026; 10027; 10028; 10029; 10030; 10031; 10032; 10033; 10034; 10035; 10036; 10037; 10038; 10039; 10040; 10041; 10045; 10048; 10065; 10069; 10075; 10103; 10105; 10110; 10111; 10112; 10118; 10119; 10122; 10123; 10128; 10151; 10153; 10158; 10168; 10169; 10170; 10173; 10174; 10176; 10179; 10271; 10278; 10279; 10280; 10281; 10282; 10301; 10302; 10303; 10304; 10305; 10306; 10307; 10308; 10309; 10310; 10312; 10314; 10451; 10452; 10453; 10454; 10455; 10456; 10457; 10458; 10459; 10460; 10461; 10462; 10463; 10464; 10465; 10466; 10467; 10468; 10469; 10470; 10471; 10472; 10473; 10474; 10475; 11001; 11004; 11005; 11040; 11101; 11102; 11103; 11104; 11105; 11106; 11109; 11201; 11203; 11204; 11205; 11206; 11207; 11208; 11209; 11210; 11211; 11212; 11213; 11214; 11215; 11216; 11217; 11218; 11219; 11220; 11221; 11222; 11223; 11224; 11225; 11226; 11228; 11229; 11230; 11231; 11232; 11233; 11234; 11235; 11236; 11237; 11238; 11239; 11242; 11249; 11354; 11355; 11356; 11357; 11358; 11359; 11360; 11361; 11362; 11363; 11364; 11365; 11366; 11367; 11368; 11369; 11370; 11372; 11373; 11374; 11375; 11377; 11378; 11379; 11385; 11411; 11412; 11413; 11414; 11415; 11416; 11417; 11418; 11419; 11420; 11421; 11422; 11423; 11426; 11427; 11428; 11429; 11430; 11432; 11433; 11434; 11435; 11436; 11691; 11692; 11693; 11694; 11697.
+
+\paragraph{\texttt{city}} ARVERNE; ASTORIA; BAYSIDE; BELLEROSE; BREEZY POINT; BRONX; BROOKLYN; CAMBRIA HEIGHTS; COLLEGE POINT; CORONA; EAST ELMHURST; ELMHURST; FAR ROCKAWAY; FLORAL PARK; FLUSHING; FOREST HILLS; FRESH MEADOWS; GLEN OAKS; HOLLIS; HOWARD BEACH; JACKSON HEIGHTS; JAMAICA; KEW GARDENS; LITTLE NECK; LONG ISLAND CITY; MANHATTAN; MASPETH; MIDDLE VILLAGE; NEW HYDE PARK; NEW YORK; OAKLAND GARDENS; OZONE PARK; QUEENS; QUEENS VILLAGE; REGO PARK; RICHMOND HILL; RIDGEWOOD; ROSEDALE; SAINT ALBANS; SOUTH OZONE PARK; SOUTH RICHMOND HILL; SPRINGFIELD GARDENS; STATEN ISLAND; SUNNYSIDE; WHITESTONE; WOODHAVEN; WOODSIDE.
+
+\paragraph{\texttt{community\_\allowbreak{}board}} 0 Unspecified; 01 BRONX; 01 BROOKLYN; 01 MANHATTAN; 01 QUEENS; 01 STATEN ISLAND; 02 BRONX; 02 BROOKLYN; 02 MANHATTAN; 02 QUEENS; 02 STATEN ISLAND; 03 BRONX; 03 BROOKLYN; 03 MANHATTAN; 03 QUEENS; 03 STATEN ISLAND; 04 BRONX; 04 BROOKLYN; 04 MANHATTAN; 04 QUEENS; 05 BRONX; 05 BROOKLYN; 05 MANHATTAN; 05 QUEENS; 06 BRONX; 06 BROOKLYN; 06 MANHATTAN; 06 QUEENS; 07 BRONX; 07 BROOKLYN; 07 MANHATTAN; 07 QUEENS; 08 BRONX; 08 BROOKLYN; 08 MANHATTAN; 08 QUEENS; 09 BRONX; 09 BROOKLYN; 09 MANHATTAN; 09 QUEENS; 10 BRONX; 10 BROOKLYN; 10 MANHATTAN; 10 QUEENS; 11 BRONX; 11 BROOKLYN; 11 MANHATTAN; 11 QUEENS; 12 BRONX; 12 BROOKLYN; 12 MANHATTAN; 12 QUEENS; 13 BROOKLYN; 13 QUEENS; 14 BROOKLYN; 14 QUEENS; 15 BROOKLYN; 16 BROOKLYN; 17 BROOKLYN; 18 BROOKLYN; 26 BRONX; 27 BRONX; 28 BRONX; 55 BROOKLYN; 56 BROOKLYN; 64 MANHATTAN; 80 QUEENS; 81 QUEENS; 82 QUEENS; 83 QUEENS; 84 QUEENS; 95 STATEN ISLAND; Unspecified BRONX; Unspecified BROOKLYN; Unspecified MANHATTAN; Unspecified QUEENS; Unspecified STATEN ISLAND.
+
+\paragraph{\texttt{council\_\allowbreak{}district}} 1.0; 10.0; 11.0; 12.0; 13.0; 14.0; 15.0; 16.0; 17.0; 18.0; 19.0; 2.0; 20.0; 21.0; 22.0; 23.0; 24.0; 25.0; 26.0; 27.0; 28.0; 29.0; 3.0; 30.0; 31.0; 32.0; 33.0; 34.0; 35.0; 36.0; 37.0; 38.0; 39.0; 4.0; 40.0; 41.0; 42.0; 43.0; 44.0; 45.0; 46.0; 47.0; 48.0; 49.0; 5.0; 50.0; 51.0; 6.0; 7.0; 8.0; 9.0.
+
+\paragraph{\texttt{police\_\allowbreak{}precinct}} Precinct 1; Precinct 10; Precinct 100; Precinct 101; Precinct 102; Precinct 103; Precinct 104; Precinct 105; Precinct 106; Precinct 107; Precinct 108; Precinct 109; Precinct 110; Precinct 111; Precinct 112; Precinct 113; Precinct 114; Precinct 115; Precinct 120; Precinct 121; Precinct 122; Precinct 123; Precinct 13; Precinct 14; Precinct 17; Precinct 18; Precinct 19; Precinct 20; Precinct 22; Precinct 23; Precinct 24; Precinct 25; Precinct 26; Precinct 28; Precinct 30; Precinct 32; Precinct 33; Precinct 34; Precinct 40; Precinct 41; Precinct 42; Precinct 43; Precinct 44; Precinct 45; Precinct 46; Precinct 47; Precinct 48; Precinct 49; Precinct 5; Precinct 50; Precinct 52; Precinct 6; Precinct 60; Precinct 61; Precinct 62; Precinct 63; Precinct 66; Precinct 67; Precinct 68; Precinct 69; Precinct 7; Precinct 70; Precinct 71; Precinct 72; Precinct 73; Precinct 75; Precinct 76; Precinct 77; Precinct 78; Precinct 79; Precinct 81; Precinct 83; Precinct 84; Precinct 88; Precinct 9; Precinct 90; Precinct 94; Unspecified.
+
+\subsection*{D. Derived features and modeling boundary}
+The committed EDA notebook creates hour (0--23), month (1--12, January--December), day\_of\_week (Monday--Sunday), and location\_missing (True when latitude is absent, False otherwise) in memory. They are not additional columns in the saved 38-column CSV. Hour, month, and weekday have cyclical calendar interpretations rather than a street-condition severity order. The notebook replaces borough Unspecified with missing in its working copy. Coordinates are missing in 19,601 rows (27.9\%).
+
+Weekend status and historical complaint-volume features discussed in the report remain planned; they are not created in the committed EDA notebook. If implemented, weekend denotes Saturday or Sunday. Historical counts must use only requests strictly earlier than the current request, specify the grouping and time window, and provide earlier history or an insufficient-history rule for the first window.
+
+Exclude closed\_date, closure\_hours, status, resolution\_description, and resolution\_action\_updated\_date from predictors because they can reveal the outcome. Use closed\_48h only as the response. Retain unique\_key for audit, not prediction. Other initial exclusions are given in Table 2. Missing-value handling and encoding must be learned within the training pipeline. Unique IDs do not imply independence: requests can be related by place, time, or underlying incident. No final predictor matrix, validation split, trained model, or predictive performance is established by this documentation.
+\endgroup

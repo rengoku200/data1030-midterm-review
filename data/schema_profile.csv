@@ -1,0 +1,39 @@
+column,semantic_type,missing_count,missing_percent,distinct_nonblank,initial_role,description
+unique_key,Identifier,0,0.0,70322,Audit,Unique service-request identifier. Keep as text for duplicate checks and traceability; exclude from predictors.
+created_date,Timestamp,0,0.0,68803,Derive,Request creation date and time. Parse as a datetime; derive calendar features rather than use the raw timestamp.
+closed_date,Timestamp,3475,4.942,59368,Leakage,Date and time the responding agency recorded closure. Used to calculate the outcome; exclude from predictors.
+agency,Nominal,0,0.0,1,Constant,Responding agency acronym. DOT means Department of Transportation; constant after filtering.
+agency_name,Nominal,0,0.0,1,Constant,Full responding agency name; Department of Transportation in every row.
+complaint_type,Nominal,0,0.0,1,Constant,Broad problem category. Street Condition in every row; descriptor provides the varying problem detail.
+descriptor,Nominal,0,0.0,21,Candidate,"Specific street-condition problem, with 21 observed categories defined below. These labels are not an ordered severity scale."
+incident_zip,Nominal code,749,1.065,211,Candidate,Geovalidated incident ZIP code. Preserve as text; numerical magnitude has no predictive interpretation. Codes are listed in the category inventory.
+intersection_street_1,Text,24352,34.629,4928,Audit,First intersecting street from the geovalidated incident location. High-cardinality location text.
+intersection_street_2,Text,24331,34.599,5134,Audit,Second intersecting street from the geovalidated incident location. High-cardinality location text.
+address_type,Nominal,0,0.0,6,Candidate,"Type of incident-location information, such as an address, intersection, or street segment. Six observed labels are defined below."
+city,Nominal,10900,15.5,47,Audit,City or locality name returned by geovalidation. Values are not necessarily borough names; partly redundant with other geography.
+facility_type,Nominal,70322,100.0,0,Empty,"City facility type associated with a request, if available. Entirely blank in this snapshot."
+status,Nominal,0,0.0,3,Leakage,"Request status at collection, not necessarily status at submission. Closed, Pending, and Open are defined below. Used for labeling only."
+resolution_description,Text,15,0.021,74,Leakage,"Last action described by the responding agency, sometimes including next steps. Exclude because it can reveal post-submission handling."
+resolution_action_updated_date,Timestamp,12,0.017,61931,Leakage,Date and time the responding agency last updated the request. Post-submission information; exclude from predictors.
+community_board,Nominal code,0,0.0,77,Candidate,"Geovalidated community-board label, typically a board number plus borough. Exceptional labels are retained as source values and need validation."
+council_district,Nominal code,19796,28.151,51,Candidate,"City Council district containing the request. Values 1 through 51 identify districts, not a ranking; saved CSV uses decimal-looking codes."
+police_precinct,Nominal code,0,0.0,78,Candidate,"NYPD precinct containing the request. Precinct numbers identify jurisdictions, not a ranking; Unspecified means not identified."
+borough,Nominal,0,0.0,6,Candidate,"Incident borough, submitted and confirmed by geovalidation. Five NYC boroughs plus Unspecified."
+x_coordinate_state_plane,Continuous,19598,27.869,26037,Audit,Geovalidated horizontal coordinate in the source state-plane system. The source field description does not specify units or CRS; verify before interpreting distances. Redundant with latitude/longitude.
+y_coordinate_state_plane,Continuous,19591,27.859,26682,Audit,Geovalidated vertical coordinate in the source state-plane system. The source field description does not specify units or CRS; verify before interpreting distances. Redundant with latitude/longitude.
+open_data_channel_type,Nominal,0,0.0,4,Candidate,"How the request was submitted: PHONE, ONLINE, OTHER, or UNKNOWN in this snapshot."
+park_facility_name,Text,0,0.0,1,Constant,"Name of a Parks Department facility, if applicable. Every saved value is the placeholder Unspecified."
+park_borough,Nominal,0,0.0,6,Redundant,"Source park-related borough field. In this snapshot its values match borough row for row, so retain only borough for initial modeling."
+latitude,Continuous,19601,27.873,31102,Candidate,Incident latitude in decimal degrees. Missing values must be handled within the training pipeline.
+longitude,Continuous,19601,27.873,31102,Candidate,Incident longitude in decimal degrees. Missing values must be handled within the training pipeline.
+location,Structured text,19601,27.873,31102,Redundant,Serialized geographic point containing longitude then latitude. Duplicates the separate coordinate fields; do not treat as a third independent location measurement.
+incident_address,Text,14092,20.039,23966,Audit,Incident-address text supplied for the location. High-cardinality location field; retain for audit rather than the initial predictor matrix.
+street_name,Text,14092,20.039,4709,Audit,Street name of the incident address supplied by the submitter. High-cardinality location text.
+cross_street_1,Text,14511,20.635,5735,Audit,First cross street associated with the geovalidated incident location. High-cardinality location text.
+cross_street_2,Text,14494,20.611,5335,Audit,Second cross street associated with the geovalidated incident location. High-cardinality location text.
+descriptor_2,Nominal,70302,99.972,1,Sparse,"Third level of problem detail. Only Other appears, in 20 rows; the remaining 70,302 rows are blank. Exclude initially because it is nearly empty."
+location_type,Nominal,38771,55.134,6,Candidate,"Type of location associated with the request, with six observed labels defined below. Frequently missing; optional candidate requiring missing-value handling."
+landmark,Text,48935,69.587,3366,Audit,Landmark name associated with the incident location when available. High-cardinality location text.
+bbl,Identifier,43894,62.419,18177,Audit,"Borough-Block-Lot parcel identifier from geovalidation. Preserve as an identifier, not a continuous measurement; decimal suffixes are serialization artifacts."
+closure_hours,Continuous,3475,4.942,55855,Leakage,Derived recorded duration in hours: (closed_date - created_date).total_seconds() / 3600. Missing when closure is unavailable; excludes negative durations. Never include in predictors.
+closed_48h,Binary target,0,0.0,2,Target,"1 means recorded administrative closure within 48 hours inclusive. 0 means closure after 48 hours, or missing closure with Pending/Open status at collection. See target rules and follow-up assumption below."
