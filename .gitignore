@@ -21,3 +21,6 @@ tmp/
 
 # Keep project data, figures, results, and reports tracked by default.
 # For large data, add specific ignore rules and document download steps.
+
+# Safe reconstruction outputs; original data snapshots remain tracked.
+data/rebuilt/

@@ -1,0 +1,166 @@
+"""Rebuild the 2025 project dataset from explicit monthly JSON inputs.
+
+The default workflow reads the saved snapshot and writes to data/rebuilt/.
+It never searches for CSV inputs or overwrites the original project data.
+"""
+
+import calendar
+import json
+from pathlib import Path
+
+import pandas as pd
+
+
+API_URL = "https://data.cityofnewyork.us/resource/erm2-nwe9.json"
+SOURCE_COLUMNS = [
+    "unique_key", "created_date", "closed_date", "agency", "agency_name",
+    "complaint_type", "descriptor", "incident_zip", "intersection_street_1",
+    "intersection_street_2", "address_type", "city", "facility_type", "status",
+    "resolution_description", "resolution_action_updated_date", "community_board",
+    "council_district", "police_precinct", "borough", "x_coordinate_state_plane",
+    "y_coordinate_state_plane", "open_data_channel_type", "park_facility_name",
+    "park_borough", "latitude", "longitude", "location", "incident_address",
+    "street_name", "cross_street_1", "cross_street_2", "descriptor_2",
+    "location_type", "landmark", "bbl",
+]
+
+
+def load_month(data_dir, year, month):
+    """Read one saved month, including the original unpadded February name."""
+    data_dir = Path(data_dir)
+    padded = data_dir / f"street_conditions_{year}_{month:02d}_raw.json"
+    unpadded = data_dir / f"street_conditions_{year}_{month}_raw.json"
+    candidates = list(dict.fromkeys([padded, unpadded]))
+    existing = [path for path in candidates if path.exists()]
+    if not existing:
+        raise FileNotFoundError(f"No saved raw JSON for {year}-{month:02d} in {data_dir}")
+    if len(existing) > 1:
+        raise ValueError(f"Multiple raw inputs for {year}-{month:02d}: {existing}")
+    with existing[0].open(encoding="utf-8") as file:
+        records = json.load(file)
+    if not isinstance(records, list) or not records:
+        raise ValueError(f"Expected a nonempty list of records in {existing[0]}")
+    return records
+
+
+def collect_month(start_date, end_date):
+    """Optional live API download; not called by the saved-snapshot workflow.
+
+    The live source can change during pagination or between downloads.
+    Preserve new downloads separately from the original snapshot.
+    """
+    import requests
+
+    start = pd.Timestamp(start_date).isoformat()
+    end = pd.Timestamp(end_date).isoformat()
+    if pd.Timestamp(start) >= pd.Timestamp(end):
+        raise ValueError("start_date must precede end_date")
+    where = (
+        "agency = 'DOT' AND complaint_type = 'Street Condition' "
+        f"AND created_date >= '{start}' AND created_date < '{end}'"
+    )
+    records = []
+    offset = 0
+    while True:
+        response = requests.get(
+            API_URL,
+            params={"$where": where, "$order": "created_date ASC, unique_key ASC",
+                    "$limit": 5000, "$offset": offset},
+            timeout=120,
+        )
+        response.raise_for_status()
+        batch = response.json()
+        if not isinstance(batch, list):
+            raise ValueError("API returned an unexpected response")
+        records.extend(batch)
+        if len(batch) < 5000:
+            return records
+        offset += 5000
+
+
+def process_month(records, year, month):
+    """Validate a month, calculate hours, and return cleaned data plus checks."""
+    frame = pd.DataFrame(records)
+    required = ["unique_key", "created_date", "agency", "complaint_type", "status"]
+    absent = [column for column in required if column not in frame]
+    if absent:
+        raise ValueError(f"Missing required columns: {absent}")
+    if frame["unique_key"].isna().any() or frame["unique_key"].eq("").any():
+        raise ValueError("Missing request IDs")
+    frame["unique_key"] = frame["unique_key"].astype(str)
+    duplicates = int(frame["unique_key"].duplicated().sum())
+    if duplicates:
+        raise ValueError(f"{year}-{month:02d}: {duplicates} duplicate request IDs")
+    if not (frame["agency"].eq("DOT") & frame["complaint_type"].eq("Street Condition")).all():
+        raise ValueError("Input contains requests outside DOT / Street Condition")
+    unexpected = sorted(set(frame.columns) - set(SOURCE_COLUMNS))
+    if unexpected:
+        raise ValueError(f"Source schema changed; review new fields: {unexpected}")
+    frame = frame.reindex(columns=SOURCE_COLUMNS)
+    for column in ["created_date", "closed_date", "resolution_action_updated_date"]:
+        frame[column] = pd.to_datetime(frame[column], format="ISO8601", errors="raise")
+    start = pd.Timestamp(year=year, month=month, day=1)
+    end = start + pd.DateOffset(months=1)
+    if not (frame["created_date"].ge(start) & frame["created_date"].lt(end)).all():
+        raise ValueError(f"Input contains requests outside {year}-{month:02d}")
+    difference = frame["closed_date"] - frame["created_date"]
+    frame["closure_hours"] = difference.dt.total_seconds() / 3600
+    negative = frame["closure_hours"].lt(0)
+    clean = frame.loc[~negative].copy()
+    checks = {
+        "month": month,
+        "collected": len(frame),
+        "duplicates": duplicates,
+        "missing_closure": int(frame["closed_date"].isna().sum()),
+        "negative_excluded": int(negative.sum()),
+        "retained": len(clean),
+    }
+    return clean, checks
+
+
+def label_requests(combined):
+    """Apply the existing project's target rules without changing their meaning.
+
+    Missing-closure Pending/Open requests are negative under the original
+    sufficient-follow-up and record-completeness assumptions. This function
+    is for the saved 2025 cohort, not newly submitted requests with <48h follow-up.
+    """
+    data = combined.copy()
+    data["closed_48h"] = pd.Series(pd.NA, index=data.index, dtype="Int64")
+    hours = data["closure_hours"]
+    data.loc[hours.between(0, 48, inclusive="both"), "closed_48h"] = 1
+    data.loc[hours.gt(48), "closed_48h"] = 0
+    unresolved = data["closed_date"].isna() & data["status"].isin(["Pending", "Open"])
+    data.loc[unresolved, "closed_48h"] = 0
+    return data.dropna(subset=["closed_48h"]).copy()
+
+
+def build_dataset(data_dir, output_dir, year=2025):
+    """Rebuild all twelve months, writing only inside a separate output folder."""
+    data_dir, output_dir = Path(data_dir).resolve(), Path(output_dir).resolve()
+    if output_dir == data_dir:
+        raise ValueError("Do not overwrite the source data folder; use data/rebuilt/")
+    if year != 2025:
+        raise ValueError("Review follow-up assumptions before labeling a different year")
+    frames, summaries = [], []
+    # Explicit month selection avoids reading any combined/labeled CSV as input.
+    for month in range(1, 13):
+        records = load_month(data_dir, year, month)
+        clean, checks = process_month(records, year, month)
+        frames.append(clean)
+        summaries.append(checks)
+    combined = pd.concat(frames, ignore_index=True)
+    if combined["unique_key"].duplicated().any():
+        raise ValueError("Duplicate request IDs across monthly inputs")
+    combined = combined.sort_values(["created_date", "unique_key"]).reset_index(drop=True)
+    labeled = label_requests(combined)
+    checks = pd.DataFrame(summaries)
+    # Validate all inputs before writing anything. Original snapshot files stay intact.
+    output_dir.mkdir(parents=True, exist_ok=True)
+    for month, frame in enumerate(frames, start=1):
+        name = calendar.month_name[month].lower()
+        frame.to_csv(output_dir / f"street_conditions_{name}_{year}_clean.csv", index=False)
+    checks.to_csv(output_dir / f"monthly_checks_{year}.csv", index=False)
+    combined.to_csv(output_dir / f"street_conditions_{year}_combined.csv", index=False)
+    labeled.to_csv(output_dir / f"street_conditions_{year}_labeled.csv", index=False)
+    return combined, labeled, checks

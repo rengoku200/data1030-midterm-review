@@ -12,7 +12,7 @@ The saved labeled dataset contains **70,322 rows and 38 columns**. The binary ta
 - [Full data dictionary](data/data_dictionary.md): definitions and modeling roles for all 38 columns, units, cleaning decisions, target rules, missing values, and limitations.
 - [Category inventory](data/category_inventory.csv): all observed categorical values, their counts, and meanings, including geographic codes.
 - [Schema profile](data/schema_profile.csv): one row per column with semantic type and missingness.
-- [Report with completed documentation appendix](report/Data_Midterm_Report_documented.pdf).
+- [Optional reference copy with documentation appendix](report/Data_Midterm_Report_documented.pdf); documentation can remain in GitHub rather than be included in the submitted report.
 - [Appendix LaTeX source](report/appendix_data_documentation.tex) and [instructions](report/README.md).
 
 ## Repository structure
@@ -29,7 +29,7 @@ LICENSE
 README.md
 ```
 
-`src/data_collection.ipynb` contains the API exploration, monthly collection helpers, cleaning checks, concatenation, and target creation. `src/eda_1.ipynb` reads the saved labeled CSV, derives calendar fields and a location-missing indicator, and creates exploratory plots. Historical-volume features and weekend status mentioned in the report remain planned; the committed EDA notebook does not create them.
+`src/data_collection.ipynb` is the rerunnable entry point for rebuilding the saved snapshot. It calls `src/collection_pipeline.py` to load raw monthly JSONs, validate and clean them, concatenate the months, and construct the target. The original interactive notebook is preserved under `src/archive/` as a historical reference. `src/eda_1.ipynb` reads the saved labeled CSV, derives calendar fields and a location-missing indicator, and creates exploratory plots. Historical-volume features and weekend status mentioned in the report remain planned; the committed EDA notebook does not create them.
 
 ## Data source and collection
 
@@ -72,7 +72,7 @@ print(df["closed_48h"].value_counts())
 
 ### Environment versions
 
-The repository includes a pinned **starter environment**, listed below. The committed collection notebook records Python **3.14.6** in its metadata, which differs from that starter. Exact package versions from the original execution were not captured. Accordingly, the YAML is a setup starting point; these are **not verified versions of the original run**, and a clean end-to-end execution has not been established.
+The repository includes a pinned **starter environment**, listed below. The archived original collection notebook records Python **3.14.6** in its metadata, which differs from that starter. Exact package versions from the original execution were not captured. These are **not verified versions of the original collection run**. The updated saved-snapshot pipeline has been checked against all twelve committed raw JSON inputs with pandas 2.2.3; that verifies reconstruction, not the original environment or a fresh live API collection.
 
 | Component | Starter `environment.yml` |
 |---|---|
@@ -99,9 +99,26 @@ for package in ["numpy", "pandas", "matplotlib", "seaborn", "scikit-learn", "req
         print(package, "not installed in this kernel")
 ```
 
-### Collection notebook reruns
+### Safely rebuild the saved dataset
 
-The collection notebook records an interactive development process and should be reviewed before using **Run All**. It uses `Path` before a later import, and its broad monthly-file glob can also match the already-created combined and labeled CSVs on a rerun. The automated collector writes numeric month filenames, whereas the saved monthly inputs have month names. Rerunning unchanged can therefore mix old and new inputs or count generated files twice. These code issues have been documented, not repaired in this documentation step. Work from the saved labeled snapshot for current EDA.
+Open `src/data_collection.ipynb` and run the cells from top to bottom. Launch Jupyter from the repository root or `src/`.
+
+- The default run reads the twelve committed raw JSON files. It makes no network requests.
+- Every import and path is initialized before use; each month is selected explicitly, including February's existing unpadded filename.
+- Duplicate IDs, unexpected schema fields, and incorrect date/agency/problem filters stop processing rather than silently changing the sample.
+- Outputs go to **`data/rebuilt/`**: twelve cleaned monthly CSVs, a twelve-month checks table, and combined/labeled CSVs. The original CSVs and the EDA notebook's input remain untouched. Output filenames use month names consistently.
+- Rebuilt rows are sorted by creation time and request ID. The original snapshot has 70,324 combined rows and 70,322 labeled rows, with the same 44,355 positive and 25,967 negative labels. Timestamp formatting, numeric-code formatting, and last-digit floating-point representation may differ from the original CSV, without changing the underlying values.
+- `collect_month(start_date, end_date)` is still available in the helper module for an intentional live API download. It is not called by the default notebook. Preserve live downloads separately: the source is mutable, so a later download need not reproduce the saved snapshot.
+
+Validation included rebuilding all twelve saved months, comparing all 38 columns by request ID with the original labeled CSV (normalizing timestamp/numeric formatting), and checking five offline safety/boundary tests. Notebook code cells were also checked sequentially in fresh Python processes; this environment does not permit starting a Jupyter kernel, so the Jupyter frontend itself was not tested.
+
+The original development notebook is retained as `src/archive/data_collection_original.ipynb` for reference. It is not the supported Run All entry point. The updated workflow does not implement or alter the EDA.
+
+Run the offline boundary and safety checks from `src/`:
+
+```bash
+python -m unittest test_collection_pipeline -v
+```
 
 ## Modeling boundary
 
