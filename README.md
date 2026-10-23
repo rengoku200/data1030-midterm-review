@@ -29,7 +29,7 @@ LICENSE
 README.md
 ```
 
-`src/data_collection.ipynb` is the rerunnable entry point for rebuilding the saved snapshot. It calls `src/collection_pipeline.py` to load raw monthly JSONs, validate and clean them, concatenate the months, and construct the target. The original interactive notebook is preserved under `src/archive/` as a historical reference. `src/eda_1.ipynb` reads the saved labeled CSV, derives calendar fields and a location-missing indicator, and creates exploratory plots. Historical-volume features and weekend status mentioned in the report remain planned; the committed EDA notebook does not create them.
+`src/data_collection.ipynb` is the rerunnable entry point for rebuilding the saved snapshot. It calls `src/collection_pipeline.py` to load raw monthly JSONs, validate and clean them, concatenate the months, and construct the target. The original interactive notebook is preserved under `src/archive/` as a historical reference. `src/eda_row.ipynb` reads the saved labeled CSV, derives calendar fields and a location-missing indicator, and creates exploratory plots. The current EDA notebook creates weekend status (`is_weekend`). Historical-volume features mentioned in the report remain planned; they are not implemented in the committed EDA notebook.
 
 ## Data source and collection
 
@@ -56,7 +56,7 @@ cd src
 jupyter lab
 ```
 
-Open `eda_1.ipynb` from `src/` so its `../data/` and `../figures/` paths resolve. The saved CSV can also be inspected directly:
+Open `eda_row.ipynb` from `src/` so its `../data/` and `../figures/` paths resolve. The saved CSV can also be inspected directly:
 
 ```python
 import pandas as pd
@@ -127,3 +127,7 @@ Use only predictors that would be available when a new request is submitted. Exc
 ## License and attribution
 
 Code is covered by the repository's [LICENSE](LICENSE). NYC Open Data is the source of the underlying records; the repository's code license does not change the city's data-use terms. Cite the dataset and retain its attribution when sharing results.
+
+## AI assistance
+
+OpenAI ChatGPT / Codex assisted with the column documentation and `process_month`, authored the later rerunnable implementation and tests, and generated/revised repository documentation. Baidy primarily developed the original `collect_month` from his existing collection code, with ChatGPT guidance. See [AI_USAGE.md](AI_USAGE.md) for file-level authorship and the conversation-source requirement. **The actual shared chat URL still needs to be added.**
