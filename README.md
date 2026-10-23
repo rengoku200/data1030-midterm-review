@@ -120,14 +120,10 @@ Run the offline boundary and safety checks from `src/`:
 python -m unittest test_collection_pipeline -v
 ```
 
-## Modeling boundary
-
-Use only predictors that would be available when a new request is submitted. Exclude closure timestamps, closure duration, status, resolution text, and resolution-update time from predictors because they contain outcome information. Use the request ID for audit only. Candidate predictors and optional calendar features are specified in the dictionary; no final matrix, trained model, or predictive performance is claimed yet.
-
 ## License and attribution
 
 Code is covered by the repository's [LICENSE](LICENSE). NYC Open Data is the source of the underlying records; the repository's code license does not change the city's data-use terms. Cite the dataset and retain its attribution when sharing results.
 
 ## AI assistance
 
-OpenAI ChatGPT / Codex assisted with the column documentation and `process_month`, authored the later rerunnable implementation and tests, and generated/revised repository documentation. Baidy primarily developed the original `collect_month` from his existing collection code, with ChatGPT guidance. See [AI_USAGE.md](AI_USAGE.md) for file-level authorship and the conversation-source requirement. **The actual shared chat URL still needs to be added.**
+ChatGPT assisted with the column documentation and `process_month`, authored the later rerunnable implementation and tests, and generated/revised repository documentation. See [AI_USAGE.md](AI_USAGE.md) for file-level authorship and the conversation-source requirement. 
