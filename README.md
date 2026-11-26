@@ -139,3 +139,4 @@ Code is covered by the repository's [LICENSE](LICENSE). NYC Open Data is the sou
 ## AI assistance
 
 ChatGPT assisted with the column documentation and `process_month`, authored the later rerunnable implementation and tests, and generated/revised repository documentation. See [AI_USAGE.md](AI_USAGE.md) for file-level authorship and the conversation-source requirement. 
+I asked claude to check and upload my output files.
