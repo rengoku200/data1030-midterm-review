@@ -20,9 +20,9 @@ The saved labeled dataset contains **70,322 rows and 38 columns**. The binary ta
 ```text
 data/       Raw monthly JSON, cleaned monthly CSVs, combined/labeled CSVs, documentation
 figures/    EDA figures by day of week, borough, and month
-results/    Reserved for future models, predictions, and evaluation outputs
-report/     Midterm PDF and editable appendix LaTeX
-src/        Collection/cleaning notebook and EDA notebook
+results/    Cross-validation results for each model grid (random forest, SVM)
+report/     Midterm PDF, editable appendix LaTeX, and notebook PDF exports
+src/        Collection/cleaning, EDA, and modeling notebooks
 .gitignore
 environment.yml
 LICENSE
@@ -30,6 +30,18 @@ README.md
 ```
 
 `src/data_collection.ipynb` is the rerunnable entry point for rebuilding the saved snapshot. It calls `src/collection_pipeline.py` to load raw monthly JSONs, validate and clean them, concatenate the months, and construct the target. The original interactive notebook is preserved under `src/archive/` as a historical reference. `src/eda_row.ipynb` reads the saved labeled CSV, derives calendar fields and a location-missing indicator, and creates exploratory plots. The current EDA notebook creates weekend status (`is_weekend`). Historical-volume features mentioned in the report remain planned; they are not implemented in the committed EDA notebook.
+
+## Modeling
+
+All models use the same five predictors, the same November–December test set (untouched until every model is done), the same August, September, and October chronological validation folds with 48-hour gaps, and macro F1.
+
+| Notebook | Model | Best parameters | Mean validation macro F1 |
+|---|---|---|---|
+| `src/models.ipynb` | Logistic regression | C = 0.1 | 0.6649 |
+| `src/models_rf_svm.ipynb` | Random forest | max_depth = 100, min_samples_split = 16 | 0.6839 |
+| `src/models_rf_svm.ipynb` | SVM (RBF) | C = 1, gamma = 1 | 0.6844 |
+
+Full grid results are in `results/rf_cv_results.csv` and `results/svc_cv_results.csv`. A PDF export of the random forest and SVM notebook is in `report/models_rf_svm.pdf`.
 
 ## Data source and collection
 

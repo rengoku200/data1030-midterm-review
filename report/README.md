@@ -2,6 +2,7 @@
 
 - `Data_Midterm_Report_documented.pdf`: the supplied draft's first four pages followed by the completed data-documentation appendix. Its original empty appendix page was replaced. Main report prose and figures were not edited in this documentation step.
 - `appendix_data_documentation.tex`: editable technical reference covering the saved 38 columns, target rules, units, missingness, categorical values, feature roles, and limitations.
+- `models_rf_svm.pdf`: PDF export of `src/models_rf_svm.ipynb` (random forest and SVM tuning) with its saved outputs.
 - `appendix_standalone.tex`: wrapper for compiling the appendix on its own. Page numbering starts at 5 to match the supplied draft.
 
 ## Add the appendix to your LaTeX report
